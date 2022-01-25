@@ -101,7 +101,7 @@
 
                         <li class="nav-item">
 
-                            <a href="../widgets.html" class="nav-link">
+                            <a href="/Blog/AdminBlogList/" class="nav-link">
 
                                 <i class="nav-icon fas fa-th"></i>
 
@@ -111,9 +111,22 @@
                             </a>
 
                         </li>
+                        
                         <li class="nav-item">
 
-                            <a href="../widgets.html" class="nav-link">
+                            <a href="/Blog/AdminBlogList2/" class="nav-link">
+
+                                <i class="nav-icon fas fa-blog"></i>
+
+                                <p>
+                                    Blog Hızlı Bakış
+                                </p>
+                            </a>
+
+                        </li>
+                        <li class="nav-item">
+
+                            <a href="/Author/AuthorList/ class="nav-link">
 
                                 <i class="nav-icon fas fa-people-arrows"></i>
 
@@ -123,21 +136,32 @@
                             </a>
 
                         </li>
-                        <li class="nav-item">
-
-                            <a href="../widgets.html" class="nav-link">
-
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-comment"></i>
-
                                 <p>
-                                    Yorumlar
+                                    YORUMLAR
+                                    <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
-
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/Comment/AdminCommentListTrue" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Yayınlanan Yorumlar</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Comment/AdminCommentListFalse" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Kaldırılan Yorumlar</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item">
 
-                            <a href="../widgets.html" class="nav-link">
+                            <a href="/Category/AdminCategoryList/" class="nav-link">
 
                                 <i class="nav-icon fas fa-box"></i>
 
@@ -149,7 +173,7 @@
                         </li>
                         <li class="nav-item">
 
-                            <a href="../widgets.html" class="nav-link">
+                            <a href="/About/UpdateAboutList" class="nav-link">
 
                                 <i class="nav-icon fas fa-adress-book"></i>
 
@@ -161,7 +185,7 @@
                         </li>
                         <li class="nav-item">
 
-                            <a href="../widgets.html" class="nav-link">
+                            <a href="/Contact/SendBox/" class="nav-link">
 
                                 <i class="nav-icon fas fa-phone"></i>
 
@@ -222,16 +246,10 @@
 
                 <div class="container-fluid">
 
-                    <div class="row mb-2">
-
+                    
                      
 
                             @RenderBody()
-
-                  
-
-
-                    </div>
 
                 </div><!-- /.container-fluid -->
 
