@@ -3,6 +3,7 @@
     ViewBag.Title = "AdminCategoryList";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+@{ string color = "";}
 
 <!DOCTYPE html>
 
@@ -72,13 +73,13 @@
 
                             <th>
 
-                                Kategori Bar
+                                Durum
 
                             </th>
 
-                            <th style="width: 8%" class="text-center">
+                            <th style="width: 1%">
 
-                                Durum
+                                ID
 
                             </th>
 
@@ -93,6 +94,14 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
+                            if (item.CategoryStatus==true)
+                            {
+                                color = "badge badge-success";
+                            }
+                            if (item.CategoryStatus==false)
+                            {
+                                color = "badge badge-warning";
+                            }
                             <tr>
 
                                 <td>@item.CategoryID</td>
@@ -143,13 +152,13 @@
 
                                 <td class="project-state">
 
-                                    <span class="badge badge-success">Success</span>
+                                    <span class="@color">@item.CategoryStatus</span>
 
                                 </td>
 
                                 <td class="project-actions text-right">
 
-                                    <a class="btn btn-primary btn-sm" href="#">
+                                    <a class="btn btn-primary btn-sm" href="/Blog/BlogByCategory/@item.CategoryID">
 
                                         <i class="fas fa-folder">
 
@@ -159,7 +168,7 @@
 
                                     </a>
 
-                                    <a class="btn btn-info btn-sm" href="#">
+                                    <a class="btn btn-info btn-sm" href="/Category/CategoryEdit/@item.CategoryID">
 
                                         <i class="fas fa-pencil-alt">
 
@@ -169,13 +178,21 @@
 
                                     </a>
 
-                                    <a class="btn btn-danger btn-sm" href="#">
+                                    <a class="btn btn-danger btn-sm" href="/Category/CategoryDelete/@item.CategoryID">
 
                                         <i class="fas fa-trash">
 
                                         </i>
 
-                                        Sil
+                                        Pasifleştir
+
+                                    </a>
+                                    <a class="btn btn-secondary btn-sm" href="/Category/CategoryStatusTrue/@item.CategoryID">
+
+                                        <i class="fas fa-atom">
+
+                                        </i>
+                                        Aktifleştir
 
                                     </a>
 
@@ -196,7 +213,29 @@
         <!-- /.card -->
 
     </section>
+    <button class="btn btn-primary" data-toggle="modal" data-target="#Modal1">Yeni kategori ekle</button>
+    <div class="modal" id="Modal1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Yeni kategori ekleme paneli</h2>
+                </div>
+                <form method="post" action="/Category/AdminCategoryAdd/">
+                    <div class="modal-body">
+                        <label>Kategori Adı</label>
+                        <input type="text" name="CategoryName" class="form-control" />
+                        <br />
+                        <label>Kategori Açıklama</label>
+                        <input type="text" name="CategoryDescription" class="form-control" />
+                        <br />
 
+                        <button class="btn btn-dark">Kaydet</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

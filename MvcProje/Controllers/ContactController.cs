@@ -12,16 +12,19 @@ namespace MvcProje.Controllers
     {
         // GET: Contact
         private ContactManager cm = new ContactManager();
+        [AllowAnonymous]
         public ActionResult Index()
         {
             
             return View();
         }
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult AddContact()
         {
             return View();
         }
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult AddContact(Contact p)
         {

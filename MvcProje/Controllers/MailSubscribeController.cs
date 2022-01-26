@@ -8,6 +8,7 @@ using EntityLayer.Concrete;
 
 namespace MvcProje.Controllers
 {
+    [AllowAnonymous]
     public class MailSubscribeController : Controller
     {
         [HttpGet]
