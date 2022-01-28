@@ -5,6 +5,7 @@
 }
 @{ string color = "";}
 @{ string casename = "";}
+@{ int puan = 1;}
 <!DOCTYPE html>
 
 <html>
@@ -61,7 +62,7 @@
 
                             <th style="width: 20%">
 
-                                Bolg Başlığı
+                                Blog Başlığı
 
                             </th>
 
@@ -89,23 +90,24 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            if (item.BlogRating >= 85)
+                            puan = puan * item.BlogRating;
+                            if (puan >= 85)
                             {
                                 color = "post-category text-white bg-success mb-3";
                                 casename = "Çok iyi";
                             }
-                            if (item.BlogRating <= 84 && item.BlogRating >= 70)
+                            if (puan <= 84 && puan >= 70)
                             {
                                 color = "post-category text-white bg-info mb-3";
                                 casename = "İyi";
 
                             }
-                            if (item.BlogRating <= 69 && item.BlogRating >= 50)
+                            if (puan <= 69 && puan >= 50)
                             {
                                 color = "post-category text-white bg-secondary mb-3";
                                 casename = "Orta";
                             }
-                            if (item.BlogRating <= 49 && item.BlogRating >= 0)
+                            if (puan <= 49 && puan >= 0)
                             {
                                 color = "post-category text-white bg-danger mb-3";
                                 casename = "Düşük";
@@ -115,20 +117,21 @@
 
                                 <td>@item.BlogID</td>
                                 <td>@item.BlogTitle</td>
+                                
 
                                 <td class="project_progress">
 
                                     <div class="progress progress-sm">
 
-                                        <div class="progress-bar bg-green" role="progressbar" aria-volumenow="@item.BlogRating%" aria-volumemin="0" aria-volumemax="100" style="width: @item.BlogRating%">
+                                        <div class="progress-bar bg-green" role="progressbar" aria-volumenow="@item.BlogRating%" aria-volumemin="0" aria-volumemax="100" style="width: @puan%">
 
                                         </div>
 
                                     </div>
 
                                     <small>
-
-                                        @item.BlogRating%
+                                        Aldığı Puan
+                                        @puan
 
                                     </small>
 

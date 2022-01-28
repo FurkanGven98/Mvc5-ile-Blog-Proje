@@ -99,18 +99,21 @@
 
 
 
-                        <li class="nav-item">
+                      @if (User.IsInRole("A"))
+                      {
+                          <li class="nav-item">
 
-                            <a href="/Blog/AdminBlogList/" class="nav-link">
+                              <a href="/Blog/AdminBlogList/" class="nav-link">
 
-                                <i class="nav-icon fas fa-th"></i>
+                                  <i class="nav-icon fas fa-th"></i>
 
-                                <p>
-                                    Bloglar
-                                </p>
-                            </a>
+                                  <p>
+                                      Bloglar
+                                  </p>
+                              </a>
 
-                        </li>
+                          </li>
+                      }
                         
                         <li class="nav-item">
 
@@ -126,7 +129,7 @@
                         </li>
                         <li class="nav-item">
 
-                            <a href="/Author/AuthorList/ class="nav-link">
+                            <a href="/Author/AuthorList/" class="nav-link">
 
                                 <i class="nav-icon fas fa-people-arrows"></i>
 
@@ -222,7 +225,7 @@
                         </li>
                         <li class="nav-item">
 
-                            <a href="../widgets.html" class="nav-link">
+                            <a href="/User/LogOut/" class="nav-link">
 
                                 <i class="nav-icon fas fa-car"></i>
 
