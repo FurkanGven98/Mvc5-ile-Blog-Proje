@@ -5,10 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using EntityLayer.Concrete;
 
-namespace BusinessLayer.Abstract
+namespace DataAccessLayer.Abstract
 {
-    public interface IContactService :IGenericService<Contact>
+    public interface IMailDal : IRepository<SubscribeMail>
     {
-        
     }
 }

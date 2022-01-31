@@ -7,6 +7,7 @@ using System.Web.Security;
 using System.Web.UI.WebControls.WebParts;
 using BusinessLayer.Concrete;
 using DataAccessLayer.Concrete;
+using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 
 namespace MvcProje.Controllers
@@ -16,7 +17,7 @@ namespace MvcProje.Controllers
     {
         // GET: AuthorLogin
         private UserProfileManager userProfile = new UserProfileManager();
-        private BlogManager bm = new BlogManager();
+        private BlogManager bm = new BlogManager(new EfBlogDal());
         public ActionResult Index()
         {
           
@@ -48,7 +49,7 @@ namespace MvcProje.Controllers
         [HttpGet]
         public ActionResult UpdateBlog(int id)
         {
-            Blog blog = bm.FindBlog(id);
+            Blog blog = bm.GetByID(id);
 
             Context c = new Context();
             List<SelectListItem> values = (from x in c.Categories.ToList()
@@ -75,7 +76,7 @@ namespace MvcProje.Controllers
         [HttpPost]
         public ActionResult UpdateBlog(Blog p)
         {
-            bm.UpdateBlog(p);
+            bm.TUpdate(p);
             return RedirectToAction("BlogList");
         }
 
@@ -110,7 +111,7 @@ namespace MvcProje.Controllers
         [HttpPost]
         public ActionResult AddNewBlog(Blog b)
         {
-            bm.BlogAddBL(b);
+            bm.TAdd(b);
             return RedirectToAction("BlogList");
 
         }

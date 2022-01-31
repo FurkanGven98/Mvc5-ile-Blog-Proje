@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccessLayer.Abstract;
+using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
 
-namespace BusinessLayer.Abstract
+namespace DataAccessLayer.EntityFramework
 {
-    public interface IContactService :IGenericService<Contact>
+    public class EfBlogDal : Repository<Blog>,IBlogDal
     {
-        
     }
 }

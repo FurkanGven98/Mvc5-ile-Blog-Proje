@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BusinessLayer.Concrete;
+using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 
 namespace MvcProje.Controllers
@@ -11,7 +12,7 @@ namespace MvcProje.Controllers
     public class CommentController : Controller
     {
         // GET: Comment
-        private CommentManager cm = new CommentManager();
+        private CommentManager cm = new CommentManager(new EfCommentDal());
         [AllowAnonymous]
         public PartialViewResult CommentList(int id)
         {
@@ -30,7 +31,7 @@ namespace MvcProje.Controllers
         public PartialViewResult LeaveComment(Comment c)
         {
             c.CommentStatus = true;
-            cm.CommentAdd(c);
+            cm.TAdd(c);
             return PartialView();
         }
 

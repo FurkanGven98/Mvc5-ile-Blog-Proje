@@ -3,29 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessLayer.Abstract;
+using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
 
 namespace BusinessLayer.Concrete
 {
-    public class ContactManager
+    public class ContactManager: IContactService
     {
+        private IContactDal _contactDal;
         Repository<Contact> repocontact = new Repository<Contact>();
 
-        public int BLContactAdd(Contact c)
+        public ContactManager(IContactDal contactDal)
         {
-            return repocontact.Insert(c);
+            _contactDal = contactDal;
+        }
+        public List<Contact> GetList()
+        {
+            return  _contactDal.List();
         }
 
-        public List<Contact> GetAll()
+        public void TAdd(Contact t)
         {
-            return repocontact.List();
+            _contactDal.Insert(t);
         }
 
-        public Contact GetContactDetails(int id)
+        public Contact GetByID(int id)
         {
-            return repocontact.Find(x => x.ContactID == id);
+            return _contactDal.Find(x => x.ContactID == id);
+        }
 
+        public void TDelete(Contact t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void TUpdate(Contact t)
+        {
+            throw new NotImplementedException();
         }
     }
 }

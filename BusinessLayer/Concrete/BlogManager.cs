@@ -4,60 +4,55 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessLayer.Abstract;
+using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
 
 namespace BusinessLayer.Concrete
 {
-    public class BlogManager
+    public class BlogManager : IBlogService
     {
-        private Repository<Blog> repoblog = new Repository<Blog>();
+        IBlogDal _blogDal;
 
-        public List<Blog> GetAll()
+        public BlogManager(IBlogDal blogdal)
         {
-            return repoblog.List();
+            _blogDal = blogdal;
         }
-
         public List<Blog> GetBlogByID(int id)
         {
-            return repoblog.List(x => x.BlogID == id);
+            return _blogDal.List(x => x.BlogID == id);
         }
         public List<Blog> GetBlogByAuthor(int id)
         {
-            return repoblog.List(x => x.AuthorID == id);
+            return _blogDal.List(x => x.AuthorID == id);
         }
 
         public List<Blog> GetBlogByCategory(int id)
         {
-            return repoblog.List(x => x.CategoryID == id);
+            return _blogDal.List(x => x.CategoryID == id);
+        }
+        public List<Blog> GetList()
+        {
+            return _blogDal.List();
         }
 
-        public int BlogAddBL(Blog p)
+        public void TAdd(Blog t)
         {
-            return repoblog.Insert(p);
+            _blogDal.Insert(t);
+        }
+        public Blog GetByID(int id)
+        {
+            return _blogDal.GetByID(id);
         }
 
-        public int DeleteBlogBL(int p)
+        public void TDelete(Blog t)
         {
-            Blog blog = repoblog.Find(x => x.BlogID == p);
-            return repoblog.Delete(blog);
+            _blogDal.Delete(t);
         }
-
-        public Blog FindBlog(int id)
+        public void TUpdate(Blog t)
         {
-            return repoblog.Find(x => x.BlogID == id);
-        }
-
-        public int UpdateBlog(Blog p)
-        {
-            Blog blog = repoblog.Find(x => x.BlogID == p.BlogID);
-            blog.BlogTitle = p.BlogTitle;
-            blog.BlogContent = p.BlogContent;
-            blog.BlogDate = p.BlogDate;
-            blog.BlogImage = p.BlogImage;
-            blog.CategoryID = p.CategoryID;
-            blog.AuthorID = p.AuthorID;
-            return repoblog.Update(blog);
+            _blogDal.Update(t);
         }
     }
 }

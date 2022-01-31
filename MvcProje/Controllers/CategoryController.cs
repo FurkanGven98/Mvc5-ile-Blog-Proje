@@ -18,19 +18,19 @@ namespace MvcProje.Controllers
         private CategoryManager cm = new CategoryManager(new EfCategoryDal());
         public ActionResult Index()
         {
-            var categoryValues = cm.GetAll();
+            var categoryValues = cm.GetList();
             return View(categoryValues);
         }
         [AllowAnonymous]
         public PartialViewResult BlogDetailsCategoryList()
         {
-            var categoryValues = cm.GetAll();
+            var categoryValues = cm.GetList();
             return PartialView(categoryValues);
         }
 
         public ActionResult AdminCategoryList()
         {
-            var categorylist = cm.GetAll();
+            var categorylist = cm.GetList();
             return View(categorylist);
 
         }
@@ -46,7 +46,7 @@ namespace MvcProje.Controllers
             ValidationResult results = categoryValidator.Validate(p);
             if (results.IsValid)
             {
-                cm.CategoryAddBL(p);
+                cm.TAdd(p);
                 return RedirectToAction("AdminCategoryList");
             }
             else
@@ -62,7 +62,7 @@ namespace MvcProje.Controllers
         [HttpGet]
         public ActionResult CategoryEdit(int id)
         {
-            Category category = cm.FindCategory(id);
+            Category category = cm.GetByID(id);
             return View(category);
         }
         [HttpPost]
@@ -72,7 +72,7 @@ namespace MvcProje.Controllers
             ValidationResult results = categoryValidator.Validate(p);
             if (results.IsValid)
             {
-                cm.EditCategory(p);
+                cm.TUpdate(p);
                 return RedirectToAction("AdminCategoryList");
             }
             else

@@ -3,49 +3,49 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessLayer.Abstract;
+using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
 
 namespace BusinessLayer.Concrete
 {
-    public class AuthorManager
-    {
+    public class AuthorManager : IAuthorService
+     {
+         IAuthorDal _authordal;
         Repository<Author> repoauthor = new Repository<Author>();
-        //Tüm yazar listesini getirme
-        public List<Author> GetAll()
-        {
-            return repoauthor.List();
 
-        }
-        //Yeni Yazar ekleme işlemi
-        public int AddAuthorBL(Author p)
+        public AuthorManager(IAuthorDal authordal)
         {
-            //Parametreden gönderilen değerlerin geçerlilik kontrolü,hata aldığımızdan yorum bloğu yapıldı.
-            //if (p.AuthorName == "" | p.AboutShort == "" | p.AuthorTitle == "")
-            //{
-            //    return-1
-            //}
-            return repoauthor.Insert(p);
+            _authordal = authordal;
+        }
+        public List<Author> GetList()
+        {
+            return  _authordal.List();
         }
 
-        //yazarı ıdye göre taşıma
-        public Author FinAuthor(int id)
+        public void TAdd(Author t)
         {
-            return repoauthor.Find(x => x.AuthorID == id);
+            _authordal.Insert(t);
+        }
+        public Author GetByID(int id)
+        {
+            return _authordal.GetByID(id);
         }
 
-        public int EditAuthor(Author p)
+        public void TDelete(Author t)
         {
-            Author author = repoauthor.Find(x => x.AuthorID == p.AuthorID);
-            author.AboutShort = p.AboutShort;
-            author.AuthorName = p.AuthorName;
-            author.AuthorImage = p.AuthorImage;
-            author.AuthorAbout = p.AuthorAbout;
-            author.AuthorTitle = p.AuthorTitle;
-            author.Mail = p.Mail;
-            author.Password = p.Password;
-            author.PhoneNumber = p.PhoneNumber;
-            return repoauthor.Update(author);
+            throw new NotImplementedException();
+        }
+
+        public void TUpdate(Author t)
+        {
+            _authordal.Update(t);
+        }
+
+        public void AuthorDelete(Author author)
+        {
+            throw new NotImplementedException();
         }
     }
 }
